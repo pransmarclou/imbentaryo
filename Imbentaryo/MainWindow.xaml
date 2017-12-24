@@ -1,0 +1,168 @@
+﻿<Window
+    x:Class="Imbentaryo.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Imbentaryo"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wp="clr-namespace:Imbentaryo"
+    Title="Imbentaryo"
+    Width="850"
+    Height="650"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{StaticResource MaterialDesignFont}"
+    Icon="Images/Logo/logo_inventory.png"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d" ResizeMode="NoResize">
+
+
+    <Grid x:Name="MainGrid">
+
+
+        <!--  List of all the buttons on LeftDrawer  -->
+        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel MinWidth="212">
+                    <ToggleButton
+                        Margin="16"
+                        HorizontalAlignment="Right"
+                        DockPanel.Dock="Top"
+                        IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
+                        Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
+                    <ListBox
+                        x:Name="lstDockLeft"
+                        Margin="0,16,0,16"
+                        SelectedIndex="0">
+                        <Button
+                            x:Name="btnHome"
+                            MinWidth="200"
+                            MinHeight="40"
+                            HorizontalAlignment="Left"
+                            Click="btnHome_Click"
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Left}"
+                            Style="{DynamicResource MaterialDesignFlatButton}">
+                            Home
+                        </Button>
+                        <Button
+                            x:Name="btnInventory"
+                            MinWidth="200"
+                            MinHeight="40"
+                            HorizontalAlignment="Left"
+                            Click="btnInventory_Click"
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Left}"
+                            Style="{DynamicResource MaterialDesignFlatButton}">
+                            Inventory
+                        </Button>
+                        <Button
+                            x:Name="btnPurchase"
+                            MinWidth="200"
+                            MinHeight="40"
+                            HorizontalAlignment="Center"
+                            Click="btnPurchase_Click"
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Left}"
+                            Style="{DynamicResource MaterialDesignFlatButton}">
+                            Purchase
+                        </Button>
+                        <Button
+                            x:Name="btnSell"
+                            MinWidth="200"
+                            MinHeight="40"
+                            HorizontalAlignment="Center"
+                            Click="btnSell_Click"
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Left}"
+                            Style="{DynamicResource MaterialDesignFlatButton}">
+                            Sell
+                        </Button>
+                        <Button
+                            x:Name="btnSellReport"
+                            MinWidth="200"
+                            MinHeight="40"
+                            HorizontalAlignment="Center"
+                            Click="btnSellReport_Click"
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Left}"
+                            Style="{DynamicResource MaterialDesignFlatButton}">
+                            Sell Report
+                        </Button>
+                        <Button
+                            x:Name="btnClose"
+                            MinWidth="200"
+                            MinHeight="40"
+                            HorizontalAlignment="Center"
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Left}"
+                            Style="{DynamicResource MaterialDesignFlatButton}">
+                            Close
+                        </Button>
+                    </ListBox>
+                </DockPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+            <Grid x:Name="grdUserControl" VerticalAlignment="Bottom">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <ContentControl
+                    x:Name="cntControl"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch" 
+                    Grid.Row="1"/>
+            </Grid>
+
+        </materialDesign:DrawerHost>
+
+        <!--  Top Panel containing the title and list  -->
+        <DockPanel>
+            <materialDesign:ColorZone
+                Padding="5"
+                materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                DockPanel.Dock="Top"
+                Mode="PrimaryMid">
+                <DockPanel>
+                    <ToggleButton
+                        x:Name="MenuToggleButton"
+                        IsChecked="False"
+                        Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+                    <materialDesign:PopupBox
+                        DockPanel.Dock="Right"
+                        PlacementMode="BottomAndAlignRightEdges"
+                        StaysOpen="False">
+                        <StackPanel>
+                            <Button Content="Hello World" />
+                            <Button Content="Nice Popup" />
+                            <Button Content="Can't Touch This" IsEnabled="False" />
+                            <Separator />
+                            <Button Content="Goodbye" />
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+                    <TextBlock
+                        x:Name="txbTitle"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="22"
+                        Text="Home" />
+                </DockPanel>
+            </materialDesign:ColorZone>
+        </DockPanel>
+
+        <!--<Grid
+            VerticalAlignment="Bottom">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <wp:Admin x:Name="wpAdmin" Visibility="Hidden" />
+        </Grid>-->
+
+    </Grid>
+</Window>
